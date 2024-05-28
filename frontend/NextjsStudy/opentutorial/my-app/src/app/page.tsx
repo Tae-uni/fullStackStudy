@@ -5,6 +5,7 @@ export default function Home() {
     <>
       <h2>Welcome</h2>
       Hello, WEB!
+      <img src="/next.svg" alt="Next.js LOGO" />
     </>
   );
 }
