@@ -8,7 +8,8 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const resp = await fetch('http://localhost:9999/topics', { cache: 'no-store' });
+  const resp = await fetch(process.env.NEXT_PUBLIC_API_URL+ 'topics', { cache: 'no-store' });
+  // The way use Environment Variables with server component
   const topics = await resp.json();
   return (
     <html>
