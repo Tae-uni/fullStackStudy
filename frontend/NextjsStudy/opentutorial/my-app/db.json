@@ -7,8 +7,8 @@
     },
     {
       "id": 2,
-      "title": "css",
-      "body": "css is ..."
+      "title": "CsS",
+      "body": "CsS is ..."
     },
     {
       "id": 3
@@ -22,6 +22,16 @@
       "title": "react",
       "body": "reat is ...",
       "id": 5
+    },
+    {
+      "title": "aAA",
+      "body": "aaaA",
+      "id": 6
+    },
+    {
+      "title": "Hi js",
+      "body": "Js is.. df",
+      "id": 7
     }
   ],
   "posts": [
