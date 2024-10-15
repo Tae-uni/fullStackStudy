@@ -2,11 +2,11 @@ export const createUserValidationSchema = {
   username: {
     isLength: {
       options: {
-        min: 5,
+        min: 3,
         max: 32,
       },
       errorMessage:
-        "Username must be at least 5 characters with a max of 32 characters",
+        "Username must be at least 3 characters with a max of 32 characters",
     },
     notEmpty: {
       errorMessage: "Username cannot be empty",
@@ -20,4 +20,9 @@ export const createUserValidationSchema = {
       errorMessage: "DisplayName cannot be empty",
     },
   },
-}
+  password: {
+    notEmpty: {
+      errorMessage: "Password cannot be empty",
+    },
+  },
+};
