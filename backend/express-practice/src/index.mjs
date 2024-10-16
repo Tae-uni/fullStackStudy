@@ -1,10 +1,13 @@
 import express, { response } from 'express';
-import routes from "./routes/index.mjs";
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
-import "./strategies/local-strategy.mjs";
 import mongoose from 'mongoose';
+import MongoStore from 'connect-mongo';
+
+// import "./strategies/local-strategy.mjs";
+import "./strategies/discord-strategy.mjs";
+import routes from "./routes/index.mjs";
 
 const app = express();
 
@@ -21,11 +24,15 @@ app.use(cookieParser('helloValue'));
 app.use(
   session({
     secret: "tseiohvdafiodafe",
-    saveUninitialized: false,
-    resave: false,
+    saveUninitialized: false, // If it's true, every single time when user hit the API saves info in Session.
+    resave: false, // If it's true, when user hit the API, expires date will refresh.
     cookie: {
       maxAge: 60000 * 60,
     },
+    // Session Stores
+    store: MongoStore.create({
+      client: mongoose.connection.getClient(),
+    }),
   })
 );
 
@@ -49,7 +56,7 @@ app.get("/", (request, response) => {
   response.status(201).send({ msg: 'HI' });
 });
 
-app.post('/api/auth', passport.authenticate('local'), (req, res) => { res.sendStatus(200) });
+// app.post('/api/auth', passport.authenticate('local'), (req, res) => { res.sendStatus(200) });
 
 app.get('/api/auth/status', (req, res) => {
   console.log(`Inside /auth/status endpoint`);
@@ -69,3 +76,14 @@ app.post('/api/auth/logout', (req, res) => {
     res.sendStatus(200);
   });
 });
+
+app.get('/api/auth/discord', passport.authenticate('discord'));
+app.get(
+  '/api/auth/discord/redirect',
+  passport.authenticate('discord'),
+  (request, response) => {
+    console.log(request.session);
+    console.log(request.user);
+    response.sendStatus(200);
+  }
+);
