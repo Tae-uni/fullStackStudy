@@ -1,4 +1,4 @@
-import express, { response } from 'express';
+import express from 'express';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import passport from 'passport';
